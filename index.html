@@ -1840,7 +1840,7 @@ document.querySelectorAll('.faq-question').forEach(btn=>{
   let chatHistory=[];
   let isOpen=false;
   let greeted=false;
-  const apiKey='';
+  
 
   const SYSTEM_PROMPT=`Você é Luna, assistente virtual da Feito de Sonhos, empresa de Festa do Pijama em Cascavel/PR. Seja sempre simpática, use emojis com moderação e responda em português brasileiro.
 
@@ -1960,11 +1960,10 @@ REGRAS:
 
     try{
       const groqMessages=[{role:'system',content:SYSTEM_PROMPT},...chatHistory];
-      const response=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      const response=await fetch('/api/chat',{
         method:'POST',
         headers:{
           'Content-Type':'application/json',
-          'Authorization':'Bearer '+apiKey,
         },
         body:JSON.stringify({
           model:'llama-3.3-70b-versatile',
