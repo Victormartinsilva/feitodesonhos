@@ -172,25 +172,27 @@ section{padding:100px 48px}
 .tw.sel .xbtn{display:flex;}
 
 /* ── ESPAÇO NECESSÁRIO ── */
-.espaco-box{background:white;border:1px solid var(--blush);border-radius:14px;padding:16px;margin:20px 0 4px;}
-.espaco-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:12px;}
-.espaco-min{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--rose);color:white;border-radius:10px;padding:10px 14px;margin-bottom:10px;}
-.espaco-val{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;}
-.espaco-x{font-size:14px;opacity:.8;}
-.espaco-nota{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:6px;}
-.espaco-dica{font-size:11px;color:var(--rose);background:var(--soft);border-radius:8px;padding:6px 10px;margin-bottom:14px;line-height:1.5;}
-.espaco-check-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.espaco-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.espaco-box{background:var(--soft);border:1px solid var(--blush);border-radius:16px;padding:18px 20px;margin-top:16px;}
+.espaco-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.espaco-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.espaco-min{display:inline-flex;align-items:center;gap:6px;background:var(--rose);color:white;border-radius:10px;padding:8px 14px;margin-bottom:8px;}
+.espaco-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;}
+.espaco-x{font-size:13px;opacity:.8;}
+.espaco-nota{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:5px;}
+.espaco-dica{font-size:11px;color:var(--rose);line-height:1.5;}
+.espaco-check-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.espaco-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
 .espaco-field label{display:block;font-size:10px;color:var(--muted);margin-bottom:3px;font-weight:500;}
 .espaco-field input{width:100%;border:1.5px solid var(--blush);border-radius:8px;padding:7px 10px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none;box-sizing:border-box;transition:border-color .2s;}
 .espaco-field input:focus{border-color:var(--rose);}
 .espaco-btn{width:100%;padding:9px;background:var(--rose);color:white;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .2s;}
 .espaco-btn:hover{opacity:.87;}
-.espaco-result{margin-top:10px;border-radius:10px;padding:0;font-size:12px;line-height:1.5;overflow:hidden;max-height:0;transition:max-height .3s,padding .3s;}
-.espaco-result.show{max-height:120px;padding:10px 12px;}
+.espaco-result{margin-top:12px;border-radius:10px;padding:0;font-size:12px;line-height:1.6;overflow:hidden;max-height:0;transition:max-height .3s,padding .3s;}
+.espaco-result.show{max-height:120px;padding:10px 14px;}
 .espaco-result.ok{background:#e8f7ee;color:#1a6e3a;border:1px solid #a3d9b5;}
 .espaco-result.warn{background:#fff7e6;color:#7a4e00;border:1px solid #f5cc7a;}
 .espaco-result.no{background:#fdf0f0;color:#8a1a1a;border:1px solid #f5a0a0;}
+@media(max-width:600px){.espaco-row{grid-template-columns:1fr;gap:14px;}}
 
 /* PÚBLICO */
 #publico{background:var(--soft)}
@@ -1125,32 +1127,6 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
           <button class="tbtn t-preto" data-theme="preto">Dark</button>
           <button class="tbtn t-colorido" data-theme="colorido" style="grid-column:span 2">Colorido</button>
         </div>
-        <!-- Espaço necessário -->
-        <div class="espaco-box">
-          <div class="espaco-title">📐 Espaço necessário para sua festa</div>
-          <div class="espaco-min" id="espacoMin">
-            <span class="espaco-val" id="espacoLarg">2,40m</span>
-            <span class="espaco-x">×</span>
-            <span class="espaco-val">1,60m</span>
-          </div>
-          <div class="espaco-nota">Cada cabana usa 0,80m de largura (2 colchonetes de 0,40m)</div>
-          <div class="espaco-dica">💡 Adicione 0,50m extra ao redor para circulação</div>
-
-          <div class="espaco-check-label">Verificar se cabe no meu espaço:</div>
-          <div class="espaco-inputs">
-            <div class="espaco-field">
-              <label>Largura (m)</label>
-              <input type="number" id="inpLarg" placeholder="ex: 3,50" step="0.1" min="0.5">
-            </div>
-            <div class="espaco-field">
-              <label>Comprimento (m)</label>
-              <input type="number" id="inpComp" placeholder="ex: 2,80" step="0.1" min="0.5">
-            </div>
-          </div>
-          <button class="espaco-btn" onclick="verificarEspaco()">Verificar se cabe</button>
-          <div class="espaco-result" id="espacoResult"></div>
-        </div>
-
         <div class="cfg-label" style="margin-top:20px">Adicionais</div>
         <div id="adicionais">
           <label class="add-row"><input type="checkbox" data-price="80"> Café da manhã</label>
@@ -1179,6 +1155,37 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
           </div>
         </div>
         <div id="chips"></div>
+
+        <!-- Espaço necessário — abaixo da visualização -->
+        <div class="espaco-box">
+          <div class="espaco-row">
+            <div class="espaco-left">
+              <div class="espaco-title">📐 Espaço necessário</div>
+              <div class="espaco-min">
+                <span class="espaco-val" id="espacoLarg">2,40m</span>
+                <span class="espaco-x">×</span>
+                <span class="espaco-val">1,60m</span>
+              </div>
+              <div class="espaco-nota">Cada cabana: 0,80m largura × 1,60m comprimento</div>
+              <div class="espaco-dica">💡 +0,50m ao redor para circulação</div>
+            </div>
+            <div class="espaco-right">
+              <div class="espaco-check-label">Verificar se cabe</div>
+              <div class="espaco-inputs">
+                <div class="espaco-field">
+                  <label>Largura (m)</label>
+                  <input type="number" id="inpLarg" placeholder="3,50" step="0.1" min="0.5">
+                </div>
+                <div class="espaco-field">
+                  <label>Comprimento (m)</label>
+                  <input type="number" id="inpComp" placeholder="2,80" step="0.1" min="0.5">
+                </div>
+              </div>
+              <button class="espaco-btn" onclick="verificarEspaco()">Verificar</button>
+            </div>
+          </div>
+          <div class="espaco-result" id="espacoResult"></div>
+        </div>
       </div>
     </div>
   </div>
