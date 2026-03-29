@@ -35,7 +35,7 @@ nav{
   transition:border-color .3s;
 }
 nav.scrolled{border-color:var(--blush);}
-/* Quando sidebar expande, nav não se move (drawer overlay) */
+
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;letter-spacing:.04em;color:var(--text);text-decoration:none;}
 .nav-logo span{color:var(--rose);font-style:italic}
 .nav-links{display:flex;gap:20px;list-style:none;align-items:center;}
@@ -199,7 +199,7 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 .p-star{position:absolute;pointer-events:none;animation:floatUp var(--dur,10s) var(--delay,0s) infinite linear;opacity:0;font-size:var(--size,14px);}
 @keyframes floatUp{0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0}5%{opacity:.8}85%{opacity:.5}100%{transform:translateY(-105vh) translateX(var(--drift,20px)) rotate(360deg);opacity:0}}
 
-/* nav-mobile removido — substituído por sidebar drawer */
+
 
 /* ── COUNTERS ── */
 .counters{display:flex;gap:0;margin-top:36px;border-top:1px solid var(--blush);padding-top:28px;flex-wrap:wrap;}
@@ -409,204 +409,24 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 .nav-logo-img{height:48px;width:auto;display:block;filter:drop-shadow(0 1px 6px rgba(0,0,0,.08));}
 @media(max-width:860px){.nav-logo-img{height:38px;}}
 
-/* ══════════════════════════════════════
-   SIDEBAR — Rail retrátil fixo à esquerda
-   ══════════════════════════════════════ */
 
-/* Container fixo — drawer overlay (sempre fora da tela quando fechado) */
-#sidebar{
-  position:fixed !important;
-  top:0 !important;
-  left:calc(-1 * var(--sb-open)) !important;
-  width:var(--sb-open) !important;
-  height:100vh;
-  background:var(--cream);
-  z-index:500;
-  display:flex;
-  flex-direction:column;
-  overflow-y:auto;
-  border-right:1px solid var(--blush);
-  box-shadow:none;
-  transition:left .35s cubic-bezier(.4,0,.2,1),
-             box-shadow .35s;
-}
-#sidebar.open{
-  left:0 !important;
-  box-shadow:4px 0 24px rgba(0,0,0,.12);
-}
+/* ── MOBILE MENU ── */
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:499;opacity:0;pointer-events:none;transition:opacity .3s;}
+.mob-overlay.open{opacity:1;pointer-events:all;}
+.mob-menu{position:fixed;top:0;right:-100%;width:min(300px,82vw);height:100vh;background:var(--cream);z-index:500;display:flex;flex-direction:column;padding:0;box-shadow:-4px 0 24px rgba(0,0,0,.12);transition:right .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;}
+.mob-menu.open{right:0;}
+.mob-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--blush);}
+.mob-close{background:none;border:none;cursor:pointer;font-size:22px;color:var(--muted);line-height:1;padding:4px;transition:color .2s;}
+.mob-close:hover{color:var(--rose);}
+.mob-nav{display:flex;flex-direction:column;flex:1;padding:8px 0;}
+.mob-nav a{display:flex;align-items:center;gap:12px;padding:14px 24px;text-decoration:none;color:var(--text);font-size:15px;border-bottom:1px solid rgba(237,213,192,.4);transition:color .2s,background .2s;}
+.mob-nav a:last-child{border-bottom:none;}
+.mob-nav a:hover{color:var(--rose);background:rgba(200,100,122,.05);}
+.mob-nav a.active{color:var(--rose);font-weight:500;}
+.mob-nav .mob-icon{font-size:18px;width:28px;text-align:center;}
+.mob-cta{margin:16px 20px 24px;padding:13px;background:var(--rose);color:white;text-align:center;text-decoration:none;border-radius:24px;font-size:14px;font-weight:500;transition:opacity .2s;}
+.mob-cta:hover{opacity:.85;color:white;}
 
-/* Botão hamburguer dentro da sidebar */
-.sidebar-toggle{
-  width:var(--sb-closed);
-  height:56px;
-  flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  background:none;border:none;cursor:pointer;
-  margin-top:4px;
-}
-.sidebar-toggle span{
-  display:block;width:16px;height:1.5px;
-  background:var(--rose);border-radius:2px;
-  position:absolute;
-  transition:transform .3s,opacity .3s;
-}
-.sidebar-toggle span:nth-child(1){transform:translateY(-5px)}
-.sidebar-toggle span:nth-child(2){transform:translateY(0)}
-.sidebar-toggle span:nth-child(3){transform:translateY(5px)}
-#sidebar.open .sidebar-toggle span:nth-child(1){transform:translateY(0) rotate(45deg)}
-#sidebar.open .sidebar-toggle span:nth-child(2){opacity:0}
-#sidebar.open .sidebar-toggle span:nth-child(3){transform:translateY(0) rotate(-45deg)}
-
-/* Lista de links */
-.sidebar-nav{
-  display:flex;
-  flex-direction:column;
-  flex:1;
-  overflow:hidden;
-  margin-top:8px;
-}
-
-/* Cada link: altura fixa, flex horizontal */
-.sidebar-nav a{
-  position:relative;
-  display:flex;
-  align-items:center;
-  height:46px;
-  min-width:var(--sb-open); /* garante que o flex não encolhe */
-  text-decoration:none;
-  color:var(--muted);
-  font-family:'DM Sans',sans-serif;
-  font-size:13px;
-  font-weight:400;
-  white-space:nowrap;
-  overflow:hidden;
-  border-bottom:1px solid rgba(237,213,192,.4);
-  transition:color .2s, background .2s;
-}
-.sidebar-nav a:last-child{border-bottom:none;}
-
-/* Indicador ativo — barra esquerda */
-.sidebar-nav a::before{
-  content:'';
-  position:absolute;
-  left:0;top:8px;bottom:8px;
-  width:3px;
-  border-radius:0 3px 3px 0;
-  background:var(--rose);
-  opacity:0;
-  transform:scaleY(0);
-  transition:opacity .2s,transform .25s cubic-bezier(.4,0,.2,1);
-}
-.sidebar-nav a.active{color:var(--rose);}
-.sidebar-nav a.active::before{opacity:1;transform:scaleY(1);}
-.sidebar-nav a:hover{color:var(--rose);background:rgba(200,100,122,.04);}
-
-/* Ícone — sempre visível, centralizado nos 56px */
-.sidebar-icon{
-  flex-shrink:0;
-  width:var(--sb-closed);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:16px;
-  transition:transform .2s;
-}
-.sidebar-nav a:hover .sidebar-icon{transform:scale(1.18);}
-.sidebar-nav a.active .sidebar-icon{transform:scale(1.12);}
-
-/* Label — some/aparece */
-.sidebar-label{
-  font-size:12.5px;
-  letter-spacing:.02em;
-  opacity:0;
-  transform:translateX(-6px);
-  transition:opacity .2s .08s, transform .2s .08s;
-}
-#sidebar.open .sidebar-label{
-  opacity:1;
-  transform:translateX(0);
-}
-
-/* Dot de status ativo (pequeno ponto colorido quando fechado) */
-.sidebar-dot{
-  position:absolute;
-  right:8px;top:50%;transform:translateY(-50%) scale(0);
-  width:5px;height:5px;
-  border-radius:50%;
-  background:var(--rose);
-  transition:transform .25s;
-  pointer-events:none;
-}
-.sidebar-nav a.active .sidebar-dot{transform:translateY(-50%) scale(1);}
-#sidebar.open .sidebar-dot{opacity:0;}
-
-/* Seção tooltip ao hover (fechado) */
-/* tooltip removido — sidebar agora é drawer (sempre aberto com labels) */
-
-/* CTA no fundo */
-.sidebar-cta{
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  margin:12px 8px;
-  padding:10px 8px;
-  background:var(--rose);
-  color:white;
-  text-decoration:none;
-  border-radius:24px;
-  font-size:12px;
-  font-family:'DM Sans',sans-serif;
-  font-weight:500;
-  white-space:nowrap;
-  overflow:hidden;
-  transition:opacity .2s, padding .35s;
-  min-width:0;
-}
-.sidebar-cta:hover{opacity:.85;color:white;}
-.sidebar-cta-icon{font-size:14px;flex-shrink:0;}
-.sidebar-cta-text{
-  opacity:0;
-  max-width:0;
-  transition:opacity .2s .05s, max-width .35s;
-}
-#sidebar.open .sidebar-cta{padding:11px 14px;}
-#sidebar.open .sidebar-cta-text{opacity:1;max-width:200px;}
-
-/* Overlay — sempre disponível */
-.sidebar-overlay{
-  display:block;
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.45);
-  z-index:499;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .3s;
-}
-.sidebar-overlay.open{opacity:1;pointer-events:all;}
-
-/* Labels e CTA sempre visíveis (drawer sempre tem largura total) */
-#sidebar .sidebar-label{opacity:1 !important;transform:translateX(0) !important;}
-#sidebar .sidebar-cta-text{opacity:1 !important;max-width:200px !important;}
-#sidebar .sidebar-cta{padding:11px 14px;}
-
-/* Botão hamburguer externo — só mobile */
-.nav-hamburger{
-  display:none;
-  flex-direction:column;gap:5px;
-  background:none;border:none;cursor:pointer;padding:6px;
-}
-.nav-hamburger span{
-  display:block;width:20px;height:2px;
-  background:var(--text);border-radius:2px;transition:all .3s;
-}
-.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-@media(max-width:768px){.nav-hamburger{display:flex !important;}}
-
-/* ── AJUSTE NAV ── */
 .nav-right{display:flex;align-items:center;gap:16px;}
 
 /* ── INSTAGRAM FLOAT ── */
@@ -710,62 +530,25 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 <body>
 
 <!-- Sidebar retrátil — fixed à esquerda -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-<aside id="sidebar" role="navigation" aria-label="Menu principal">
-
-  <!-- Toggle hamburguer -->
-  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Expandir/recolher menu">
-    <span></span><span></span><span></span>
-  </button>
-
-  <nav class="sidebar-nav">
-    <a href="#home"         class="sidebar-link" data-label="Início">
-      <span class="sidebar-icon">🏠</span>
-      <span class="sidebar-label">Início</span>
-      <span class="sidebar-dot"></span>
-    </a>
-    <a href="#sobre"        class="sidebar-link" data-label="Sobre nós">
-      <span class="sidebar-icon">🌙</span>
-      <span class="sidebar-label">Sobre nós</span>
-      <span class="sidebar-dot"></span>
-    </a>
-    <a href="#servicos"     class="sidebar-link" data-label="Serviços">
-      <span class="sidebar-icon">✨</span>
-      <span class="sidebar-label">Serviços</span>
-      <span class="sidebar-dot"></span>
-    </a>
-    <a href="#galeria"      class="sidebar-link" data-label="Galeria">
-      <span class="sidebar-icon">📸</span>
-      <span class="sidebar-label">Galeria</span>
-      <span class="sidebar-dot"></span>
-    </a>
-    <a href="#configurador" class="sidebar-link" data-label="Monte sua festa">
-      <span class="sidebar-icon">🎪</span>
-      <span class="sidebar-label">Monte sua festa</span>
-      <span class="sidebar-dot"></span>
-    </a>
-    <a href="#depoimentos"  class="sidebar-link" data-label="Depoimentos">
-      <span class="sidebar-icon">💬</span>
-      <span class="sidebar-label">Depoimentos</span>
-      <span class="sidebar-dot"></span>
-    </a>
-    <a href="#faq"          class="sidebar-link" data-label="Perguntas Frequentes">
-      <span class="sidebar-icon">❓</span>
-      <span class="sidebar-label">Perguntas Frequentes</span>
-      <span class="sidebar-dot"></span>
-    </a>
-    <a href="#contato"      class="sidebar-link" data-label="Contato">
-      <span class="sidebar-icon">📍</span>
-      <span class="sidebar-label">Contato</span>
-      <span class="sidebar-dot"></span>
-    </a>
+<!-- Mobile Menu Overlay + Drawer -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-menu" id="mobMenu">
+  <div class="mob-header">
+    <img src="imagens/logo.webp" alt="Feito de Sonhos" style="height:38px;width:auto;">
+    <button class="mob-close" id="mobClose" aria-label="Fechar menu">×</button>
+  </div>
+  <nav class="mob-nav" id="mobNav">
+    <a href="#home"         class="mob-link"><span class="mob-icon">🏠</span>Início</a>
+    <a href="#sobre"        class="mob-link"><span class="mob-icon">🌙</span>Sobre nós</a>
+    <a href="#servicos"     class="mob-link"><span class="mob-icon">✨</span>Serviços</a>
+    <a href="#galeria"      class="mob-link"><span class="mob-icon">📸</span>Galeria</a>
+    <a href="#configurador" class="mob-link"><span class="mob-icon">🎪</span>Monte sua festa</a>
+    <a href="#depoimentos"  class="mob-link"><span class="mob-icon">💬</span>Depoimentos</a>
+    <a href="#faq"          class="mob-link"><span class="mob-icon">❓</span>Perguntas Frequentes</a>
+    <a href="#contato"      class="mob-link"><span class="mob-icon">📍</span>Contato</a>
   </nav>
-
-  <a href="https://wa.me/5545998383943" target="_blank" class="sidebar-cta">
-    <span class="sidebar-cta-icon">💬</span>
-    <span class="sidebar-cta-text">Falar no WhatsApp</span>
-  </a>
-</aside>
+  <a href="https://wa.me/5545998383943" target="_blank" class="mob-cta">💬 Falar no WhatsApp</a>
+</div>
 
 <!-- Nav principal (logo + cta desktop) -->
 <nav id="nav">
@@ -1569,43 +1352,32 @@ window.addEventListener('load',()=>{setTimeout(()=>loadPreset('soft'),400);});
 
 
 /* ══════════════════════════════════════
-   SIDEBAR — Rail retrátil + destaque de seção ativa
+   MOBILE MENU + ACTIVE SECTION TRACKER
    ══════════════════════════════════════ */
 (function(){
-  const sidebar = document.getElementById('sidebar');
-  const toggle  = document.getElementById('sidebarToggle');
-  const overlay = document.getElementById('sidebarOverlay');
+  const overlay = document.getElementById('mobOverlay');
+  const menu    = document.getElementById('mobMenu');
+  const closeBtn= document.getElementById('mobClose');
   const navHamb = document.getElementById('navHamburger');
-  const links   = sidebar.querySelectorAll('.sidebar-link');
+  const links   = document.querySelectorAll('.mob-link, .nav-links a');
 
-  /* ── Abrir / Fechar ── */
-  function openSidebar(){
-    sidebar.classList.add('open');
-    document.body.classList.add('sidebar-open');
+  function openMenu(){
+    menu.classList.add('open');
     overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow='hidden';
     navHamb && navHamb.classList.add('open');
   }
-  function closeSidebar(){
-    sidebar.classList.remove('open');
-    document.body.classList.remove('sidebar-open');
+  function closeMenu(){
+    menu.classList.remove('open');
     overlay.classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.style.overflow='';
     navHamb && navHamb.classList.remove('open');
   }
 
-  toggle.addEventListener('click', () =>
-    sidebar.classList.contains('open') ? closeSidebar() : openSidebar()
-  );
-  navHamb && navHamb.addEventListener('click', () =>
-    sidebar.classList.contains('open') ? closeSidebar() : openSidebar()
-  );
-  overlay.addEventListener('click', closeSidebar);
-
-  /* Links: fecha a sidebar ao clicar (drawer overlay em todos os tamanhos) */
-  links.forEach(a => {
-    a.addEventListener('click', () => closeSidebar());
-  });
+  navHamb  && navHamb.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+  closeBtn && closeBtn.addEventListener('click', closeMenu);
+  overlay  && overlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', closeMenu));
 
   /* ── Seção ativa com IntersectionObserver ── */
   const sections = document.querySelectorAll('section[id], .hero[id]');
@@ -1613,43 +1385,25 @@ window.addEventListener('load',()=>{setTimeout(()=>loadPreset('soft'),400);});
 
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if(entry.isIntersecting){
-        activeId = entry.target.id;
-        setActive(activeId);
-      }
+      if(entry.isIntersecting){ activeId = entry.target.id; setActive(activeId); }
     });
-  }, {
-    rootMargin: '-20% 0px -65% 0px',   /* ativa quando ~20% do topo entrou na viewport */
-    threshold: 0
-  });
+  }, { rootMargin:'-20% 0px -65% 0px', threshold:0 });
 
   sections.forEach(sec => obs.observe(sec));
 
   function setActive(id){
-    links.forEach(a => {
-      const match = a.getAttribute('href') === '#' + id;
-      a.classList.toggle('active', match);
-    });
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      const match = a.getAttribute('href') === '#' + id;
-      a.classList.toggle('active', match);
+    document.querySelectorAll('.mob-link, .nav-links a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#'+id);
     });
   }
 
-  /* Fallback: scroll direto para cobrir seções sem IntersectionObserver */
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY + window.innerHeight * 0.3;
     let current = '';
-    sections.forEach(sec => {
-      if(sec.offsetTop <= scrollY) current = sec.id;
-    });
-    if(current && current !== activeId){
-      activeId = current;
-      setActive(current);
-    }
-  }, {passive: true});
+    sections.forEach(sec => { if(sec.offsetTop <= scrollY) current = sec.id; });
+    if(current && current !== activeId){ activeId = current; setActive(current); }
+  }, {passive:true});
 
-  /* Inicializa o primeiro link ativo */
   setActive('home');
 })();
 
