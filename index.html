@@ -435,14 +435,14 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 .social-dial-toggle:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(200,100,122,.55);}
 .social-dial-toggle svg{width:22px;height:22px;fill:white;transition:transform .3s;}
 .social-dial-toggle.open svg{transform:rotate(45deg);}
-.social-dial-items{position:absolute;bottom:62px;right:0;display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none;}
+.social-dial-items{position:absolute;bottom:0;right:62px;display:flex;flex-direction:row-reverse;align-items:center;gap:12px;pointer-events:none;}
 .social-dial-items.open{pointer-events:auto;}
-.social-dial-row{display:flex;align-items:center;gap:10px;
-  opacity:0;visibility:hidden;transform:translateY(8px) scale(.92);
+.social-dial-row{display:flex;flex-direction:column;align-items:center;gap:5px;
+  opacity:0;visibility:hidden;transform:translateX(10px) scale(.92);
   transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s;}
 .social-dial-items.open .social-dial-row:nth-child(1){opacity:1;visibility:visible;transform:none;transition:opacity .22s ease .05s,transform .22s ease .05s,visibility 0s linear .05s;}
 .social-dial-items.open .social-dial-row:nth-child(2){opacity:1;visibility:visible;transform:none;transition:opacity .22s ease .12s,transform .22s ease .12s,visibility 0s linear .12s;}
-.social-dial-label{background:rgba(0,0,0,.65);color:#fff;font-size:.72rem;font-family:inherit;padding:4px 10px;border-radius:20px;white-space:nowrap;backdrop-filter:blur(6px);}
+.social-dial-label{background:rgba(0,0,0,.65);color:#fff;font-size:.68rem;font-family:inherit;padding:3px 8px;border-radius:20px;white-space:nowrap;backdrop-filter:blur(6px);}
 .social-dial-link{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s;}
 .social-dial-link:hover{transform:scale(1.12);}
 .social-dial-link.instagram{background:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);}
