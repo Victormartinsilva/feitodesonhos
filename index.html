@@ -36,8 +36,10 @@ nav{
 }
 nav.scrolled{border-color:var(--blush);}
 
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;letter-spacing:.04em;color:var(--text);text-decoration:none;}
-.nav-logo span{color:var(--rose);font-style:italic}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:.06em;color:var(--text);text-decoration:none;line-height:1;white-space:nowrap;}
+.nav-logo span{color:var(--rose);font-style:italic;font-weight:400;}
+.mob-logo-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;letter-spacing:.06em;color:var(--text);}
+.mob-logo-text em{color:var(--rose);font-style:italic;font-weight:400;}
 .nav-links{display:flex;gap:20px;list-style:none;align-items:center;}
 .nav-links a{font-size:12.5px;color:var(--muted);text-decoration:none;letter-spacing:.03em;transition:color .2s;position:relative;display:flex;align-items:center;gap:5px;padding:4px 6px;border-radius:8px;}
 .nav-links a:hover{color:var(--rose);background:rgba(200,100,122,.06);}
@@ -406,8 +408,6 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 
 
 /* ── LOGO IMG ── */
-.nav-logo-img{height:48px;width:auto;display:block;filter:drop-shadow(0 1px 6px rgba(0,0,0,.08));}
-@media(max-width:860px){.nav-logo-img{height:38px;}}
 
 
 /* ── MOBILE MENU ── */
@@ -534,7 +534,7 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 <div class="mob-overlay" id="mobOverlay"></div>
 <div class="mob-menu" id="mobMenu">
   <div class="mob-header">
-    <img src="imagens/logo.webp" alt="Feito de Sonhos" style="height:38px;width:auto;">
+    <span class="mob-logo-text">Feito de <em>Sonhos</em></span>
     <button class="mob-close" id="mobClose" aria-label="Fechar menu">×</button>
   </div>
   <nav class="mob-nav" id="mobNav">
@@ -556,7 +556,7 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu">
     <span></span><span></span><span></span>
   </button>
-  <a href="#home" class="nav-logo"><img src="imagens/logo.webp" alt="Feito de Sonhos — Festas do Pijama" class="nav-logo-img"></a>
+  <a href="#home" class="nav-logo">Feito de <span>Sonhos</span></a>
   <ul class="nav-links">
     <li><a href="#home"><span class="nav-icon">🏠</span>Início</a></li>
     <li><a href="#sobre"><span class="nav-icon">🌙</span>Sobre</a></li>
