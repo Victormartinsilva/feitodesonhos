@@ -49,7 +49,7 @@ nav.scrolled{border-color:var(--blush);}
 .nav-icon{font-size:14px;line-height:1;}
 .nav-cta{font-size:13px;font-weight:500;padding:9px 22px;background:var(--rose);color:white;border:none;border-radius:24px;cursor:pointer;text-decoration:none;transition:opacity .2s;white-space:nowrap;}
 .nav-cta:hover{opacity:.85}
-@media(max-width:860px){nav{padding:16px 20px}.nav-links{display:none}}
+@media(max-width:860px){nav{padding:16px 20px}.nav-links{display:none}.nav-cta{display:none;}}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;position:relative;overflow:hidden;}
@@ -447,6 +447,38 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 .mob-cta:hover{opacity:.85;color:white;}
 
 .nav-right{display:flex;align-items:center;gap:16px;}
+
+/* ── HAMBURGER BUTTON ── */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:none;cursor:pointer;padding:6px;border-radius:10px;transition:background .2s;}
+.nav-hamburger:hover{background:rgba(74,30,83,.08);}
+.nav-hamburger span{display:block;height:2px;border-radius:2px;background:var(--text);transition:transform .3s,opacity .2s,width .2s;}
+.nav-hamburger span:nth-child(2){width:70%;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;width:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:860px){.nav-hamburger{display:flex;}}
+
+/* ── BOTTOM NAV MOBILE ── */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:62px;background:var(--cream);border-top:1px solid var(--blush);z-index:490;padding:0 8px;padding-bottom:env(safe-area-inset-bottom);}
+.bottom-nav-inner{display:flex;align-items:stretch;height:100%;}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:var(--muted);font-size:9px;letter-spacing:.04em;text-transform:uppercase;font-weight:500;border:none;background:none;cursor:pointer;padding:6px 4px;transition:color .2s;border-radius:10px;font-family:'DM Sans',sans-serif;}
+.bn-item:hover,.bn-item.active{color:var(--rose);}
+.bn-item svg,.bn-icon{font-size:20px;line-height:1;transition:transform .2s;}
+.bn-item.active .bn-icon{transform:scale(1.15);}
+.bn-item.bn-cta{color:white;background:var(--rose);border-radius:14px;margin:8px 4px;flex:1.3;font-size:9px;}
+.bn-item.bn-cta:hover{opacity:.9;color:white;}
+@media(max-width:860px){
+  .bottom-nav{display:flex;}
+  body{padding-bottom:62px;}
+  .chat-toggle{bottom:78px;}
+  .chat-widget{bottom:148px;}
+  .social-dial{bottom:78px;}
+}
+@media(max-width:500px){
+  .chat-toggle{bottom:74px;}
+  .chat-widget{bottom:144px;}
+  .social-dial{bottom:74px;}
+}
 
 /* ── SOCIAL SPEED DIAL ── */
 .social-dial{position:fixed;bottom:24px;right:24px;z-index:799;width:52px;height:52px;}
@@ -1842,6 +1874,62 @@ REGRAS:
   }
 })();
 
+</script>
+
+<!-- Bottom Nav Mobile -->
+<nav class="bottom-nav" aria-label="Navegação mobile">
+  <div class="bottom-nav-inner">
+    <a href="#home" class="bn-item active" data-section="home">
+      <span class="bn-icon">🏠</span>
+      <span>Início</span>
+    </a>
+    <a href="#servicos" class="bn-item" data-section="servicos">
+      <span class="bn-icon">✨</span>
+      <span>Pacotes</span>
+    </a>
+    <a href="#configurador" class="bn-item bn-cta" data-section="configurador">
+      <span class="bn-icon">🎪</span>
+      <span>Monte</span>
+    </a>
+    <a href="#galeria" class="bn-item" data-section="galeria">
+      <span class="bn-icon">📸</span>
+      <span>Galeria</span>
+    </a>
+    <a href="#contato" class="bn-item" data-section="contato">
+      <span class="bn-icon">📍</span>
+      <span>Contato</span>
+    </a>
+  </div>
+</nav>
+
+<script>
+// Bottom nav active state
+(function(){
+  const bnItems = document.querySelectorAll('.bn-item[data-section]');
+  const sections = [];
+  bnItems.forEach(item => {
+    const id = item.dataset.section;
+    const el = document.getElementById(id) || document.querySelector('[id="'+id+'"]');
+    if(el) sections.push({id, el, item});
+  });
+  function updateBottomNav(){
+    const scrollY = window.scrollY + window.innerHeight * 0.4;
+    let current = sections[0];
+    sections.forEach(s => { if(s.el.offsetTop <= scrollY) current = s; });
+    bnItems.forEach(i => i.classList.remove('active'));
+    if(current) current.item.classList.add('active');
+  }
+  window.addEventListener('scroll', updateBottomNav, {passive:true});
+  updateBottomNav();
+  // Close mobile menu on bn-item click
+  bnItems.forEach(item => {
+    item.addEventListener('click', () => {
+      document.getElementById('mobMenu')?.classList.remove('open');
+      document.getElementById('mobOverlay')?.classList.remove('open');
+      document.getElementById('navHamburger')?.classList.remove('open');
+    });
+  });
+})();
 </script>
 
 </body>
