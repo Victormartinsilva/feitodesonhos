@@ -430,18 +430,18 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 .nav-right{display:flex;align-items:center;gap:16px;}
 
 /* ── SOCIAL SPEED DIAL ── */
-.social-dial{position:fixed;bottom:24px;right:24px;z-index:801;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
-.social-dial-toggle{width:52px;height:52px;border-radius:50%;background:var(--rose);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(200,100,122,.45);transition:transform .25s,box-shadow .25s;}
+.social-dial{position:fixed;bottom:24px;right:24px;z-index:799;width:52px;height:52px;}
+.social-dial-toggle{width:52px;height:52px;border-radius:50%;background:var(--rose);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(200,100,122,.45);transition:transform .25s,box-shadow .25s;position:relative;z-index:799;}
 .social-dial-toggle:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(200,100,122,.55);}
 .social-dial-toggle svg{width:22px;height:22px;fill:white;transition:transform .3s;}
 .social-dial-toggle.open svg{transform:rotate(45deg);}
-.social-dial-items{display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none;}
+.social-dial-items{position:absolute;bottom:62px;right:0;display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none;}
 .social-dial-items.open{pointer-events:auto;}
 .social-dial-row{display:flex;align-items:center;gap:10px;
-  opacity:0;visibility:hidden;transform:translateY(10px) scale(.9);
+  opacity:0;visibility:hidden;transform:translateY(8px) scale(.92);
   transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s;}
-.social-dial-items.open .social-dial-row:nth-child(1){opacity:1;visibility:visible;transform:none;transition-delay:.05s;transition:opacity .22s ease .05s,transform .22s ease .05s,visibility 0s linear .05s;}
-.social-dial-items.open .social-dial-row:nth-child(2){opacity:1;visibility:visible;transform:none;transition-delay:.12s;transition:opacity .22s ease .12s,transform .22s ease .12s,visibility 0s linear .12s;}
+.social-dial-items.open .social-dial-row:nth-child(1){opacity:1;visibility:visible;transform:none;transition:opacity .22s ease .05s,transform .22s ease .05s,visibility 0s linear .05s;}
+.social-dial-items.open .social-dial-row:nth-child(2){opacity:1;visibility:visible;transform:none;transition:opacity .22s ease .12s,transform .22s ease .12s,visibility 0s linear .12s;}
 .social-dial-label{background:rgba(0,0,0,.65);color:#fff;font-size:.72rem;font-family:inherit;padding:4px 10px;border-radius:20px;white-space:nowrap;backdrop-filter:blur(6px);}
 .social-dial-link{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s;}
 .social-dial-link:hover{transform:scale(1.12);}
@@ -1644,16 +1644,22 @@ SOBRE A EMPRESA:
 - Desde 2018
 
 PACOTES:
-- Slim: decoração básica elegante, tendas temáticas, cochonetes, placa personalizada
-- Mid: tudo do Slim + decoração ampliada, balões especiais, mesa decorada
-- Soft: tudo do Mid + decoração premium, kit surpresa, toalhinhas e mimo
+- Slim: decoração básica elegante, cabanas coloridas, cochonetes finos, placa personalizada. Preço base: R$250,00 (1 cabana)
+- Mid: tudo do Slim + decoração ampliada, suporte de balões, varal de luz. Preço base: R$480,00 (1 cabana)
+- Soft: tudo do Mid + decoração premium, mesa de madeira, luminária decorativa. Preço base: R$520,00 (1 cabana)
+- Kit Soneca (Tenda): R$600,00 (1 kit)
 - Recreação (adicional): recreadora especializada, jogos, spa infantil opcional
 
-TEMAS DISPONÍVEIS: Rosa, Roxo/Fadas, Azul, Verde, Natal, Dark, Colorido/Arco-íris
+TEMAS DISPONÍVEIS: Arco-íris/Chuva de Amor, Unicórnio, Pequena Sereia, Harry Potter, Naruto, Sonic, Ladybug, Tie Dye, Neon, Panda, Now United, Jardim, Capivara, TikTok
 
-ADICIONAIS: Café da manhã temático, Spa infantil, Recreação animada, Kit lanche noturno, Placas personalizadas
+ADICIONAIS: Café da manhã temático, Spa infantil, Recreação animada, Kit lanche
 
-PREÇOS BASE: 1 tenda R$220, 2 tendas R$300, 3 tendas R$350, 4 tendas R$420, 5 tendas R$490. Adicionais variam.
+PREÇOS BASE:
+- Slim 1 cabana: R$250,00
+- Mid 1 cabana: R$480,00
+- Soft 1 cabana: R$520,00
+- Kit Soneca (tenda) 1 kit: R$600,00
+O orçamento final varia conforme a cidade e o número de crianças.
 
 REGRAS:
 - Nunca confirme datas sem pedir que o cliente entre em contato com Layla
