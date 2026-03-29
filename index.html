@@ -472,13 +472,16 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 
 /* ── BOTTOM NAV MOBILE ── */
 .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:62px;background:var(--cream);border-top:1px solid var(--blush);z-index:490;padding:0 8px;padding-bottom:env(safe-area-inset-bottom);}
-.bottom-nav-inner{display:flex;align-items:stretch;height:100%;}
-.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:var(--muted);font-size:9px;letter-spacing:.04em;text-transform:uppercase;font-weight:500;border:none;background:none;cursor:pointer;padding:6px 4px;transition:color .2s;border-radius:10px;font-family:'DM Sans',sans-serif;}
-.bn-item:hover,.bn-item.active{color:var(--rose);}
-.bn-item svg,.bn-icon{font-size:20px;line-height:1;transition:transform .2s;}
-.bn-item.active .bn-icon{transform:scale(1.15);}
-.bn-item.bn-cta{color:white;background:var(--rose);border-radius:14px;margin:8px 4px;flex:1.3;font-size:9px;}
-.bn-item.bn-cta:hover{opacity:.9;color:white;}
+.bottom-nav-inner{display:flex;align-items:stretch;justify-content:center;height:100%;max-width:420px;margin:0 auto;}
+.bn-item{flex:1;max-width:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:var(--muted);font-size:9px;letter-spacing:.04em;text-transform:uppercase;font-weight:500;border:none;background:none;cursor:pointer;padding:6px 4px;transition:color .2s;border-radius:10px;font-family:'DM Sans',sans-serif;}
+.bn-item:hover{color:var(--rose);}
+.bn-item svg,.bn-icon{font-size:20px;line-height:1;transition:transform .25s cubic-bezier(.34,1.56,.64,1),color .2s;}
+.bn-item.active{color:var(--rose);}
+.bn-item.active .bn-icon{transform:scale(1.28);animation:bnPop .3s cubic-bezier(.34,1.56,.64,1);}
+@keyframes bnPop{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1.28)}}
+.bn-item.bn-cta{color:var(--muted);background:none;border-radius:10px;margin:0;flex:1;max-width:80px;font-size:9px;}
+.bn-item.bn-cta.active{color:var(--rose);}
+.bn-item.bn-cta:hover{color:var(--rose);}
 @media(max-width:860px){
   .bottom-nav{display:flex;}
   body{padding-bottom:62px;}
