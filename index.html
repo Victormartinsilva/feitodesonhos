@@ -436,12 +436,12 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 .social-dial-toggle svg{width:22px;height:22px;fill:white;transition:transform .3s;}
 .social-dial-toggle.open svg{transform:rotate(45deg);}
 .social-dial-items{display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none;}
-.social-dial-items.open .social-dial-row{pointer-events:auto;}
+.social-dial-items.open{pointer-events:auto;}
 .social-dial-row{display:flex;align-items:center;gap:10px;
-  opacity:0;transform:translateY(10px) scale(.9);
-  transition:opacity .22s ease,transform .22s ease;}
-.social-dial-items.open .social-dial-row:nth-child(1){opacity:1;transform:none;transition-delay:.05s;}
-.social-dial-items.open .social-dial-row:nth-child(2){opacity:1;transform:none;transition-delay:.12s;}
+  opacity:0;visibility:hidden;transform:translateY(10px) scale(.9);
+  transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s;}
+.social-dial-items.open .social-dial-row:nth-child(1){opacity:1;visibility:visible;transform:none;transition-delay:.05s;transition:opacity .22s ease .05s,transform .22s ease .05s,visibility 0s linear .05s;}
+.social-dial-items.open .social-dial-row:nth-child(2){opacity:1;visibility:visible;transform:none;transition-delay:.12s;transition:opacity .22s ease .12s,transform .22s ease .12s,visibility 0s linear .12s;}
 .social-dial-label{background:rgba(0,0,0,.65);color:#fff;font-size:.72rem;font-family:inherit;padding:4px 10px;border-radius:20px;white-space:nowrap;backdrop-filter:blur(6px);}
 .social-dial-link{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s;}
 .social-dial-link:hover{transform:scale(1.12);}
