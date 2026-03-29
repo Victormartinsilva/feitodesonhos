@@ -190,6 +190,12 @@ section{padding:100px 48px}
 .contato-region h4{font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;opacity:.5;margin-bottom:12px;}
 .contato-region p{font-size:15px;opacity:.8;line-height:1.7;margin:0;}
 @media(max-width:860px){.contato-inner{grid-template-columns:1fr;gap:40px}section{padding:72px 24px}}
+@media(max-width:860px){
+  .cfg-wrap{flex-direction:column;}
+  .cfg-side{width:100%;border-right:none;border-bottom:1px solid var(--blush);overflow-y:visible;}
+  #room{height:260px;}
+  .preset-row{flex-wrap:wrap;}
+}
 
 footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--blush);}
 
@@ -1260,9 +1266,9 @@ function makeDrag(el){
     if(e.target.classList.contains('xbtn'))return;
     ox=e.clientX;oy=e.clientY;sx=el.offsetLeft;sy=el.offsetTop;
     document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);
-    document.addEventListener('touchmove',tm,{passive:true});document.addEventListener('touchend',up);
+    document.addEventListener('touchmove',tm,{passive:false});document.addEventListener('touchend',up);
   };
-  const tm=e=>mv(e.touches[0]);
+  const tm=e=>{e.preventDefault();mv(e.touches[0]);};
   const mv=e=>{
     const r=room.getBoundingClientRect();
     let nx=sx+e.clientX-ox,ny=sy+e.clientY-oy;
