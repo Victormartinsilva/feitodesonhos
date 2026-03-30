@@ -412,24 +412,50 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 @media(max-width:860px){#depoimentos{padding:64px 24px;}}
 
 /* ── CARROSSEL FEEDBACKS ── */
-.fb-carousel{position:relative;margin-top:48px;overflow:hidden;}
-.fb-track{display:flex;gap:16px;transition:transform .45s cubic-bezier(.4,0,.2,1);will-change:transform;}
-.fb-slide{flex:0 0 calc(33.333% - 11px);border-radius:18px;overflow:hidden;background:white;border:1px solid var(--blush);box-shadow:0 2px 12px rgba(74,30,83,.06);transition:transform .2s,box-shadow .2s;cursor:pointer;}
-.fb-slide:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(74,30,83,.13);}
-.fb-slide img{width:100%;height:300px;object-fit:cover;object-position:top;display:block;}
-.fb-nav{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:24px;}
-.fb-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--blush);background:white;color:var(--rose);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.fb-btn:hover{background:var(--rose);color:white;border-color:var(--rose);}
-.fb-dots{display:flex;gap:6px;}
-.fb-dot{width:7px;height:7px;border-radius:50%;background:var(--blush);cursor:pointer;transition:background .2s,width .2s;border:none;padding:0;}
-.fb-dot.active{background:var(--rose);width:20px;border-radius:4px;}
+#depoimentos{padding:100px 0;background:var(--cream);}
+.dep-header{padding:0 48px;margin-bottom:40px;}
+.fb-wrap{position:relative;}
+.fb-grid{
+  display:flex;flex-direction:row;gap:14px;
+  overflow-x:auto;overflow-y:hidden;
+  scroll-behavior:smooth;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding:8px 48px 20px;
+  cursor:grab;user-select:none;
+}
+.fb-grid:active{cursor:grabbing;}
+.fb-grid::-webkit-scrollbar{height:4px;}
+.fb-grid::-webkit-scrollbar-track{background:transparent;}
+.fb-grid::-webkit-scrollbar-thumb{background:var(--blush);border-radius:4px;}
+.fb-item{
+  flex:0 0 auto;width:240px;height:320px;
+  border-radius:16px;overflow:hidden;
+  position:relative;scroll-snap-align:start;
+  transition:transform .3s,box-shadow .3s;
+}
+.fb-item:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(74,30,83,.2);}
+.fb-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;border-radius:16px;}
+.fb-item:hover img{transform:scale(1.06);}
+.fb-btn{position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;background:white;
+  border:1px solid var(--blush);box-shadow:0 4px 16px rgba(0,0,0,.12);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:18px;z-index:10;color:var(--rose);
+  transition:background .2s,transform .2s,box-shadow .2s;}
+.fb-btn:hover{background:var(--rose);color:white;transform:translateY(-50%) scale(1.1);box-shadow:0 6px 20px rgba(74,30,83,.3);}
+.fb-btn-prev{left:8px;}
+.fb-btn-next{right:8px;}
+.fb-scroll-hint{text-align:center;font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:4px;padding:0 48px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.fb-scroll-hint::before,.fb-scroll-hint::after{content:'';display:block;height:1px;width:40px;background:var(--blush);}
 @media(max-width:860px){
-  .fb-slide{flex:0 0 calc(50% - 8px);}
-  .fb-slide img{height:240px;}
+  #depoimentos{padding:64px 0;}
+  .dep-header{padding:0 24px;}
+  .fb-grid{padding:8px 24px 20px;gap:10px;}
+  .fb-item{width:180px;height:240px;}
 }
 @media(max-width:500px){
-  .fb-slide{flex:0 0 85%;}
-  .fb-slide img{height:220px;}
+  .fb-item{width:160px;height:210px;}
+  .fb-btn{width:36px;height:36px;font-size:14px;}
 }
 .dep-quote{font-family:'Cormorant Garamond',serif;font-size:72px;color:var(--rose-light);line-height:.8;margin-bottom:8px;display:block;}
 .dep-stars{color:#f5a623;font-size:15px;margin-bottom:14px;letter-spacing:2px;}
@@ -1067,65 +1093,33 @@ footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-t
 
 <section id="depoimentos">
   <div class="depoimentos-inner">
-    <div class="section-eyebrow reveal">Quem viveu conta</div>
-    <h2 class="section-title reveal">O que as <em>mamães</em> dizem</h2>
-    <div class="fb-carousel">
-      <div class="fb-track" id="fbTrack">
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.06%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.06.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.07%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.07.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.08%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.08%20%282%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.08.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.09%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.09.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.10%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.10%20%283%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.10.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.11%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.11%20%282%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.11%20%283%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.11.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-      </div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.06.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.07 (1).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.07.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.08 (1).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.08 (2).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.08.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.09 (1).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.09.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.10 (1).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.10 (3).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.10.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.11 (1).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.11 (2).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.11 (3).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 21.03.11.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-      </div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.12.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.14.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.15.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.17.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.19.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.20.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.22 (1).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.22.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.23 (1).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.23.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.24 (1).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.24.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.25 (1).jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.25.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-        <div class="fb-slide"><img src="imagens/feedback/WhatsApp Image 2026-03-29 at 20.54.26.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
-      </div>
+    <div class="dep-header">
+      <div class="section-eyebrow reveal">Quem viveu conta</div>
+      <h2 class="section-title reveal">O que as <em>mamães</em> dizem</h2>
     </div>
-    <div class="fb-nav">
-      <button class="fb-btn" id="fbPrev">&#8592;</button>
-      <div class="fb-dots" id="fbDots"></div>
-      <button class="fb-btn" id="fbNext">&#8594;</button>
+    <div class="fb-wrap">
+      <button class="fb-btn fb-btn-prev" id="fbPrev" aria-label="Anterior">&#8249;</button>
+      <div class="fb-grid" id="fbGrid">
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.06%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.06.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.07%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.07.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.08%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.08%20%282%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.08.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.09%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.09.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.10%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.10%20%283%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.10.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.11%20%281%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.11%20%282%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.11%20%283%29.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+        <div class="fb-item"><img src="imagens/feedback/WhatsApp%20Image%202026-03-29%20at%2021.03.11.jpeg" alt="Feedback cliente Feito de Sonhos" loading="lazy"></div>
+      </div>
+      <button class="fb-btn fb-btn-next" id="fbNext" aria-label="Próximo">&#8250;</button>
     </div>
+    <div class="fb-scroll-hint">deslize para ver mais</div>
   </div>
 </section>
 
@@ -1683,67 +1677,29 @@ window.addEventListener('load',()=>{setTimeout(()=>{loadPreset('soft');updateEsp
 })();
 
 /* ══════════════════════════════════════
-   FEEDBACK — carrossel de imagens
+   FEEDBACK — carrossel horizontal (estilo galeria)
    ══════════════════════════════════════ */
 (function(){
-  const track = document.getElementById('fbTrack');
-  const dotsBox = document.getElementById('fbDots');
+  const grid = document.getElementById('fbGrid');
   const btnPrev = document.getElementById('fbPrev');
   const btnNext = document.getElementById('fbNext');
-  if(!track) return;
+  if(!grid) return;
 
-  const slides = Array.from(track.querySelectorAll('.fb-slide'));
-  const total = slides.length;
-  let perView = window.innerWidth <= 500 ? 1 : window.innerWidth <= 860 ? 2 : 3;
-  let current = 0;
-  let startX = 0, isDragging = false, dragDelta = 0;
+  const step = () => (grid.querySelector('.fb-item')?.offsetWidth || 200) + 14;
 
-  function maxIdx(){ return Math.max(0, total - perView); }
+  btnPrev && btnPrev.addEventListener('click', () => grid.scrollBy({left: -step()*3, behavior:'smooth'}));
+  btnNext && btnNext.addEventListener('click', () => grid.scrollBy({left:  step()*3, behavior:'smooth'}));
 
-  function buildDots(){
-    dotsBox.innerHTML = '';
-    for(let i = 0; i <= maxIdx(); i++){
-      const d = document.createElement('button');
-      d.className = 'fb-dot' + (i === current ? ' active' : '');
-      d.addEventListener('click', (()=>{ const idx=i; return ()=>goTo(idx); })());
-      dotsBox.appendChild(d);
-    }
-  }
-
-  function updateDots(){
-    dotsBox.querySelectorAll('.fb-dot').forEach((d,i) => d.classList.toggle('active', i === current));
-  }
-
-  function getSlideW(){ return slides[0].offsetWidth + 16; }
-
-  function goTo(idx){
-    current = Math.max(0, Math.min(idx, maxIdx()));
-    track.style.transform = 'translateX(-' + (current * getSlideW()) + 'px)';
-    updateDots();
-  }
-
-  btnPrev && btnPrev.addEventListener('click', () => goTo(current - 1));
-  btnNext && btnNext.addEventListener('click', () => goTo(current + 1));
-
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; }, {passive:true});
-  track.addEventListener('touchmove', e => { if(!isDragging) return; dragDelta = e.touches[0].clientX - startX; }, {passive:true});
-  track.addEventListener('touchend', () => {
-    if(Math.abs(dragDelta) > 40) goTo(dragDelta < 0 ? current + 1 : current - 1);
-    isDragging = false; dragDelta = 0;
+  // drag para arrastar
+  let isDown=false, startX=0, scrollLeft=0;
+  grid.addEventListener('mousedown', e=>{isDown=true;startX=e.pageX-grid.offsetLeft;scrollLeft=grid.scrollLeft;grid.style.cursor='grabbing';});
+  grid.addEventListener('mouseleave',()=>{isDown=false;grid.style.cursor='grab';});
+  grid.addEventListener('mouseup',  ()=>{isDown=false;grid.style.cursor='grab';});
+  grid.addEventListener('mousemove', e=>{
+    if(!isDown)return; e.preventDefault();
+    const x=e.pageX-grid.offsetLeft;
+    grid.scrollLeft=scrollLeft-(x-startX)*1.2;
   });
-
-  let timer = setInterval(() => goTo(current < maxIdx() ? current + 1 : 0), 4000);
-  const wrap = track.closest('.fb-carousel');
-  wrap && wrap.addEventListener('mouseenter', () => clearInterval(timer));
-  wrap && wrap.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current < maxIdx() ? current + 1 : 0), 4000); });
-
-  window.addEventListener('resize', () => {
-    const np = window.innerWidth <= 500 ? 1 : window.innerWidth <= 860 ? 2 : 3;
-    if(np !== perView){ perView = np; current = 0; buildDots(); goTo(0); }
-  }, {passive:true});
-
-  buildDots();
-  goTo(0);
 })();
 
 /* ══════════════════════════════════════
